@@ -3,9 +3,9 @@ spring:
     name: certificate-blockchain-api
 
   datasource:
-    url: jdbc:postgresql://ep-quiet-bush-a1dj8gts-pooler.ap-southeast-1.aws.neon.tech/cetification?sslmode=require&channel_binding=require
-    username: neondb_owner
-    password: npg_MXDopVtUy7G5
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -23,9 +23,9 @@ server:
 blockchain:
   rpc-url: http://localhost:8548
   chain-id: 1337
-  contract-address: "0x2E1f232a9439C3D459FcEca0BeEf13acc8259Dd8"
-  admin-private-key: "0x8f2a55949038a9610f50fb23b5883af3b4ecb3c3bb792cbcefbd1542c692be63"
-  issuer-name: "Tr??ng ??i h?c Công nghi?p thành ph? H? Chí Minh"
+  contract-address: ${BLOCKCHAIN_CONTRACT_ADDRESS}
+  admin-private-key: ${BLOCKCHAIN_ADMIN_PRIVATE_KEY}
+  issuer-name: "IUH"
 
 logging:
   level:
