@@ -1,11 +1,11 @@
-package com.certificate.blockchain.certificateapi.service;
+package iuh.innogreen.blockchain.igc.service;
 
 
-import com.certificate.blockchain.certificateapi.dto.CertificateRequest;
-import com.certificate.blockchain.certificateapi.dto.CertificateResponse;
-import com.certificate.blockchain.certificateapi.dto.VerifyResponse;
-import com.certificate.blockchain.certificateapi.entity.Certificate;
-import com.certificate.blockchain.certificateapi.repository.CertificateRepository;
+import iuh.innogreen.blockchain.igc.dto.CertificateRequest;
+import iuh.innogreen.blockchain.igc.dto.CertificateResponse;
+import iuh.innogreen.blockchain.igc.dto.VerifyResponse;
+import iuh.innogreen.blockchain.igc.entity.Certificate;
+import iuh.innogreen.blockchain.igc.repository.CertificateRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package com.certificate.blockchain.certificateapi.entity;
+package iuh.innogreen.blockchain.igc.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package com.certificate.blockchain.certificateapi.repository;
+package iuh.innogreen.blockchain.igc.repository;
 
-import com.certificate.blockchain.certificateapi.entity.Certificate;
+import iuh.innogreen.blockchain.igc.entity.Certificate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

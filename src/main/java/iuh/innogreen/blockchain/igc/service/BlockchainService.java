@@ -1,4 +1,4 @@
-package com.certificate.blockchain.certificateapi.service;
+package iuh.innogreen.blockchain.igc.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
@@ -118,10 +118,14 @@ public class BlockchainService {
                     "verifyCertificate",
                     Arrays.asList(new Utf8String(certificateId)),
                     Arrays.asList(
-                            new TypeReference<Utf8String>() {},
-                            new TypeReference<Bytes32>() {},
-                            new TypeReference<Uint256>() {},
-                            new TypeReference<Bool>() {}
+                            new TypeReference<Utf8String>() {
+                            },
+                            new TypeReference<Bytes32>() {
+                            },
+                            new TypeReference<Uint256>() {
+                            },
+                            new TypeReference<Bool>() {
+                            }
                     )
             );
 

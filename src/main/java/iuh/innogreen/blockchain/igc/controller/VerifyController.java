@@ -1,7 +1,7 @@
-package com.certificate.blockchain.certificateapi.controller;
+package iuh.innogreen.blockchain.igc.controller;
 
-import com.certificate.blockchain.certificateapi.dto.VerifyResponse;
-import com.certificate.blockchain.certificateapi.service.CertificateService;
+import iuh.innogreen.blockchain.igc.dto.VerifyResponse;
+import iuh.innogreen.blockchain.igc.service.CertificateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

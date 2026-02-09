@@ -1,8 +1,8 @@
-package com.certificate.blockchain.certificateapi.controller;
+package iuh.innogreen.blockchain.igc.controller;
 
-import com.certificate.blockchain.certificateapi.dto.CertificateRequest;
-import com.certificate.blockchain.certificateapi.dto.CertificateResponse;
-import com.certificate.blockchain.certificateapi.service.CertificateService;
+import iuh.innogreen.blockchain.igc.dto.CertificateRequest;
+import iuh.innogreen.blockchain.igc.dto.CertificateResponse;
+import iuh.innogreen.blockchain.igc.service.CertificateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

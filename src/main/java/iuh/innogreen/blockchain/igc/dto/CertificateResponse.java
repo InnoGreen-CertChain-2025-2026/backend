@@ -1,4 +1,4 @@
-package com.certificate.blockchain.certificateapi.dto;
+package iuh.innogreen.blockchain.igc.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

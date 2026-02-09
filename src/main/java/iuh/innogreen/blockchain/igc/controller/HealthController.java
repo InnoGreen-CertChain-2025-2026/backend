@@ -1,6 +1,6 @@
-package com.certificate.blockchain.certificateapi.controller;
+package iuh.innogreen.blockchain.igc.controller;
 
-import com.certificate.blockchain.certificateapi.service.BlockchainService;
+import iuh.innogreen.blockchain.igc.service.BlockchainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.certificate.blockchain.certificateapi;
+package iuh.innogreen.blockchain.igc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
