@@ -40,7 +40,7 @@ public class AuthConfig {
     @NonFinal
     String jwtKey;
 
-    static MacAlgorithm MAC_ALGORITHM = MacAlgorithm.HS512;
+    public static MacAlgorithm MAC_ALGORITHM = MacAlgorithm.HS512;
 
     /**
      * ==============================================================
@@ -100,7 +100,7 @@ public class AuthConfig {
      * Utils
      * ==============================================================
      */
-    
+
     private SecretKey getSecretKey() {
         byte[] keyBytes = Base64.from(jwtKey).decode();
 
