@@ -1,5 +1,7 @@
 package iuh.innogreen.blockchain.igc.config;
 
+import iuh.innogreen.blockchain.igc.config.auth.CustomAuthenticationEntryPoint;
+import iuh.innogreen.blockchain.igc.config.auth.SkipPathBearerTokenResolver;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
@@ -27,7 +29,7 @@ public class SecurityConfig {
     String allowedOrigins;
 
     static final String[] WHITELIST = {
-            
+
             // Authentication
             "/auth/login",
             "/auth/mobile/login",
@@ -45,17 +47,30 @@ public class SecurityConfig {
     };
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
-        return http
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity httpSecurity,
+            CustomAuthenticationEntryPoint customAuthenticationEntryPoint,
+            SkipPathBearerTokenResolver skipPathBearerTokenResolver
+    ) throws Exception {
+        httpSecurity
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(WHITELIST).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(Customizer.withDefaults())
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                        .bearerTokenResolver(skipPathBearerTokenResolver)
+                )
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(sm -> sm
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll())
-                .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)
-                .build();
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
+
+        return httpSecurity.build();
     }
 
     @Bean
