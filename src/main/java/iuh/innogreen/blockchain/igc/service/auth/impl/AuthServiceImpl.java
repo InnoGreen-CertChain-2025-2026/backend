@@ -1,8 +1,8 @@
 package iuh.innogreen.blockchain.igc.service.auth.impl;
 
-import iuh.innogreen.blockchain.igc.dto.request.LoginRequest;
-import iuh.innogreen.blockchain.igc.dto.request.RegisterRequest;
-import iuh.innogreen.blockchain.igc.dto.response.UserSessionResponse;
+import iuh.innogreen.blockchain.igc.dto.request.auth.LoginRequest;
+import iuh.innogreen.blockchain.igc.dto.request.auth.RegisterRequest;
+import iuh.innogreen.blockchain.igc.dto.response.auth.UserSessionResponse;
 import iuh.innogreen.blockchain.igc.entity.User;
 import iuh.innogreen.blockchain.igc.repository.UserRepository;
 import iuh.innogreen.blockchain.igc.service.auth.JWTService;
@@ -16,15 +16,12 @@ import lombok.experimental.NonFinal;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseCookie;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Duration;
 
 /**
  * Admin 2/13/2026

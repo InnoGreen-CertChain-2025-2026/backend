@@ -1,4 +1,4 @@
-package iuh.innogreen.blockchain.igc.controller;
+package iuh.innogreen.blockchain.igc.controller.core;
 
 import iuh.innogreen.blockchain.igc.service.core.impl.BlockchainServiceImpl;
 import lombok.RequiredArgsConstructor;

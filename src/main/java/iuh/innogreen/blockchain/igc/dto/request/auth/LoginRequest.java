@@ -1,4 +1,4 @@
-package iuh.innogreen.blockchain.igc.dto.request;
+package iuh.innogreen.blockchain.igc.dto.request.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

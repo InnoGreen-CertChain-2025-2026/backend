@@ -1,6 +1,6 @@
 package iuh.innogreen.blockchain.igc.controller.core;
 
-import iuh.innogreen.blockchain.igc.dto.response.VerifyResponse;
+import iuh.innogreen.blockchain.igc.dto.response.core.VerifyResponse;
 import iuh.innogreen.blockchain.igc.service.core.CertificateService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

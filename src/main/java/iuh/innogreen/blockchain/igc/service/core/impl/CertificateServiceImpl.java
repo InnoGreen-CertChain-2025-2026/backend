@@ -1,9 +1,9 @@
 package iuh.innogreen.blockchain.igc.service.core.impl;
 
 
-import iuh.innogreen.blockchain.igc.dto.request.CertificateRequest;
-import iuh.innogreen.blockchain.igc.dto.response.CertificateResponse;
-import iuh.innogreen.blockchain.igc.dto.response.VerifyResponse;
+import iuh.innogreen.blockchain.igc.dto.request.core.CertificateRequest;
+import iuh.innogreen.blockchain.igc.dto.response.core.CertificateResponse;
+import iuh.innogreen.blockchain.igc.dto.response.core.VerifyResponse;
 import iuh.innogreen.blockchain.igc.entity.Certificate;
 import iuh.innogreen.blockchain.igc.repository.CertificateRepository;
 import iuh.innogreen.blockchain.igc.service.core.CertificateService;
