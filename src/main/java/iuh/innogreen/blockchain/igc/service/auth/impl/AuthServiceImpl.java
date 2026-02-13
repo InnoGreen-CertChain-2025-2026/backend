@@ -58,7 +58,9 @@ public class AuthServiceImpl implements iuh.innogreen.blockchain.igc.service.aut
     @NonFinal
     boolean secure;
 
-    static String REFRESH_TOKEN_COOKIE_NAME = "refresh_token";
+    @Value("${security.cookie.refresh-token-name}")
+    @NonFinal
+    String REFRESH_TOKEN_COOKIE_NAME;
 
     @Override
     public void register(RegisterRequest request) {

@@ -37,6 +37,7 @@ security:
   cookie:
     same-site: "None"
     secure: "true"
+    refresh-token-name: "refresh_token"
 
 logging:
   level:
