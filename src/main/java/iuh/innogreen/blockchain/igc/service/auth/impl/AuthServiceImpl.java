@@ -72,9 +72,10 @@ public class AuthServiceImpl implements iuh.innogreen.blockchain.igc.service.aut
                 .builder()
                 .email(request.email().toLowerCase())
                 .name(request.name())
+                .phoneNumber(request.phoneNumber())
                 .hashedPassword(passwordEncoder.encode(request.password()))
                 .address(request.address() != null && !request.address().isBlank() ? request.address() : null)
-                .dob(request.dob() != null ? request.dob() : null)
+                .dob(request.dob())
                 .build();
 
         userRepository.save(user);
@@ -95,13 +96,6 @@ public class AuthServiceImpl implements iuh.innogreen.blockchain.igc.service.aut
 
     @Override
     public ResponseCookie logout(String refreshToken) {
-        if (refreshToken != null) {
-            String email = jwtService.decodeJwt(refreshToken).getSubject();
-            var refreshTokenUser = userRepository
-                    .findByEmail(email)
-                    .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy người dùng"));
-        }
-
         return ResponseCookie
                 .from(REFRESH_TOKEN_COOKIE_NAME, "")
                 .httpOnly(true)

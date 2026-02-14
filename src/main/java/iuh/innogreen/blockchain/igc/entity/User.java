@@ -3,6 +3,7 @@ package iuh.innogreen.blockchain.igc.entity;
 import iuh.innogreen.blockchain.igc.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
@@ -16,29 +17,33 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @Column(unique = true)
-    private String email;
+    String email;
 
     @Column(nullable = false)
-    private String name;
+    String name;
 
     @Column(nullable = false)
-    private String hashedPassword;
+    String phoneNumber;
+
+    @Column(nullable = false)
+    String hashedPassword;
 
     @Column(nullable = true)
-    private String address;
+    String address;
 
     @Column(nullable = true)
-    private LocalDate dob;
+    LocalDate dob;
 
     @Column(nullable = true, name = "avatar_url")
-    private String avatarUrl;
+    String avatarUrl;
 
 }
