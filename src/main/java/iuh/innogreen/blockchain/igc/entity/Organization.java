@@ -1,6 +1,7 @@
 package iuh.innogreen.blockchain.igc.entity;
 
 import iuh.innogreen.blockchain.igc.entity.base.BaseEntity;
+import iuh.innogreen.blockchain.igc.entity.constant.ServicePlan;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -98,6 +99,15 @@ public class Organization extends BaseEntity {
 
     @Column(nullable = false)
     String contactPhone;
+
+    /**
+     * =============================================
+     * Gói dịch vụ
+     * =============================================
+     **/
+
+    @Enumerated(EnumType.STRING)
+    ServicePlan servicePlan;
 
 
 }
