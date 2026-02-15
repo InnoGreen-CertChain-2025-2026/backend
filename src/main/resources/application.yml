@@ -39,6 +39,14 @@ security:
     secure: "true"
     refresh-token-name: "refresh_token"
 
+aws:
+  access-key: ${AWS_ACCESS_KEY}
+  secret-key: ${AWS_SECRET_KEY}
+  s3:
+    bucket-name: ${AWS_BUCKET_NAME}
+    domain: ${AWS_DOMAIN}
+    region: ${AWS_REGION}
+
 logging:
   level:
     root: INFO
