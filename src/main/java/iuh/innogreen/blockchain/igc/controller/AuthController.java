@@ -1,4 +1,4 @@
-package iuh.innogreen.blockchain.igc.controller.auth;
+package iuh.innogreen.blockchain.igc.controller;
 
 import iuh.innogreen.blockchain.igc.dto.base.ApiResponse;
 import iuh.innogreen.blockchain.igc.dto.request.auth.LoginRequest;

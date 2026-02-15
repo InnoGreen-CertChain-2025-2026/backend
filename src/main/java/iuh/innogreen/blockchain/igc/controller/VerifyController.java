@@ -1,4 +1,4 @@
-package iuh.innogreen.blockchain.igc.controller.core;
+package iuh.innogreen.blockchain.igc.controller;
 
 import iuh.innogreen.blockchain.igc.dto.response.core.VerifyResponse;
 import iuh.innogreen.blockchain.igc.service.core.CertificateService;

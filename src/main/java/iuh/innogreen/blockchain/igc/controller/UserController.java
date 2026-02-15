@@ -1,4 +1,4 @@
-package iuh.innogreen.blockchain.igc.controller.user;
+package iuh.innogreen.blockchain.igc.controller;
 
 import iuh.innogreen.blockchain.igc.dto.base.ApiResponse;
 import iuh.innogreen.blockchain.igc.dto.request.user.UpdateProfileRequest;
