@@ -2,7 +2,6 @@ package iuh.innogreen.blockchain.igc.dto.request.organization;
 
 import iuh.innogreen.blockchain.igc.entity.constant.ServicePlan;
 import jakarta.validation.constraints.*;
-import org.hibernate.validator.constraints.URL;
 
 /**
  * Admin 2/15/2026

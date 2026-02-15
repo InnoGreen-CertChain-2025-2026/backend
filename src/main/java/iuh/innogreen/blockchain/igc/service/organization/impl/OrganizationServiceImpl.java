@@ -7,6 +7,7 @@ import iuh.innogreen.blockchain.igc.entity.User;
 import iuh.innogreen.blockchain.igc.entity.constant.OrganizationRole;
 import iuh.innogreen.blockchain.igc.repository.OrganizationMemberRepository;
 import iuh.innogreen.blockchain.igc.repository.OrganizationRepository;
+import iuh.innogreen.blockchain.igc.service.organization.OrganizationService;
 import iuh.innogreen.blockchain.igc.service.user.CurrentUserProvider;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class OrganizationServiceImpl {
+public class OrganizationServiceImpl implements OrganizationService {
 
     // Repository
     OrganizationMemberRepository organizationMemberRepository;
@@ -32,6 +33,7 @@ public class OrganizationServiceImpl {
     CurrentUserProvider currentUserProvider;
 
     @Transactional
+    @Override
     public void createOrganization(CreateOrganizationRequest request) {
 
         // Check ràng buộc
