@@ -3,11 +3,13 @@ package iuh.igc.controller;
 import iuh.igc.dto.base.ApiResponse;
 import iuh.igc.dto.base.PageResponse;
 import iuh.igc.dto.request.organization.CreateOrganizationRequest;
+import iuh.igc.dto.request.organization.CreateOrganizationInviteRequest;
 import iuh.igc.dto.request.organization.UpdateOrganizationContactRequest;
 import iuh.igc.dto.request.organization.UpdateOrganizationGeneralRequest;
 import iuh.igc.dto.request.organization.UpdateOrganizationLegalRequest;
 import iuh.igc.dto.response.orginazation.OrganizationResponse;
 import iuh.igc.dto.response.orginazation.OrganizationSummaryResponse;
+import iuh.igc.service.organization.OrganizationInviteService;
 import iuh.igc.service.organization.OrganizationService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -34,6 +36,7 @@ import java.util.List;
 public class OrganizationController {
 
     OrganizationService organizationService;
+    OrganizationInviteService organizationInviteService;
 
     @PostMapping
     public ApiResponse<@NonNull Void> createOrganization(
@@ -91,6 +94,30 @@ public class OrganizationController {
             @RequestBody @Valid UpdateOrganizationContactRequest request
     ) {
         organizationService.updateOrganizationContact(id, request);
+        return ApiResponse.<Void>builder().build();
+    }
+
+    @PostMapping("/{id}/invites")
+    public ApiResponse<String> inviteUserToOrganization(
+            @PathVariable("id") Long id,
+            @RequestBody @Valid CreateOrganizationInviteRequest request
+    ) {
+        return new ApiResponse<>(organizationInviteService.inviteUser(id, request));
+    }
+
+    @PostMapping("/invites/{token}/accept")
+    public ApiResponse<@NonNull Void> acceptOrganizationInvite(
+            @PathVariable("token") String token
+    ) {
+        organizationInviteService.acceptInvite(token);
+        return ApiResponse.<Void>builder().build();
+    }
+
+    @PostMapping("/invites/{token}/decline")
+    public ApiResponse<@NonNull Void> declineOrganizationInvite(
+            @PathVariable("token") String token
+    ) {
+        organizationInviteService.declineInvite(token);
         return ApiResponse.<Void>builder().build();
     }
 
