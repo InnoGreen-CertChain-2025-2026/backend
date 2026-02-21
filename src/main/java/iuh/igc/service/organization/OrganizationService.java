@@ -1,6 +1,9 @@
 package iuh.igc.service.organization;
 
 import iuh.igc.dto.request.organization.CreateOrganizationRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationContactRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationGeneralRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationLegalRequest;
 import iuh.igc.dto.response.orginazation.OrganizationResponse;
 import iuh.igc.dto.response.orginazation.OrganizationSummaryResponse;
 import org.jspecify.annotations.NonNull;
@@ -30,4 +33,13 @@ public interface OrganizationService {
 
     @Transactional(readOnly = true)
     OrganizationResponse getUserOrganizationById(Long id);
+
+    @Transactional
+    void updateOrganizationGeneral(Long id, UpdateOrganizationGeneralRequest request);
+
+    @Transactional
+    void updateOrganizationLegal(Long id, UpdateOrganizationLegalRequest request);
+
+    @Transactional
+    void updateOrganizationContact(Long id, UpdateOrganizationContactRequest request);
 }

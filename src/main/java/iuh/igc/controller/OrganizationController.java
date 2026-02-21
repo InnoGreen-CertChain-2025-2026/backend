@@ -3,6 +3,9 @@ package iuh.igc.controller;
 import iuh.igc.dto.base.ApiResponse;
 import iuh.igc.dto.base.PageResponse;
 import iuh.igc.dto.request.organization.CreateOrganizationRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationContactRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationGeneralRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationLegalRequest;
 import iuh.igc.dto.response.orginazation.OrganizationResponse;
 import iuh.igc.dto.response.orginazation.OrganizationSummaryResponse;
 import iuh.igc.service.organization.OrganizationService;
@@ -62,6 +65,33 @@ public class OrganizationController {
             @PathVariable("id") Long id
     ) {
         return new ApiResponse<>(organizationService.getUserOrganizationById(id));
+    }
+
+    @PatchMapping("/{id}/general")
+    public ApiResponse<@NonNull Void> updateOrganizationGeneral(
+            @PathVariable("id") Long id,
+            @RequestBody @Valid UpdateOrganizationGeneralRequest request
+    ) {
+        organizationService.updateOrganizationGeneral(id, request);
+        return ApiResponse.<Void>builder().build();
+    }
+
+    @PatchMapping("/{id}/legal")
+    public ApiResponse<@NonNull Void> updateOrganizationLegal(
+            @PathVariable("id") Long id,
+            @RequestBody @Valid UpdateOrganizationLegalRequest request
+    ) {
+        organizationService.updateOrganizationLegal(id, request);
+        return ApiResponse.<Void>builder().build();
+    }
+
+    @PatchMapping("/{id}/contact")
+    public ApiResponse<@NonNull Void> updateOrganizationContact(
+            @PathVariable("id") Long id,
+            @RequestBody @Valid UpdateOrganizationContactRequest request
+    ) {
+        organizationService.updateOrganizationContact(id, request);
+        return ApiResponse.<Void>builder().build();
     }
 
 

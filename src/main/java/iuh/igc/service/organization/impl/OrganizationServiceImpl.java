@@ -2,6 +2,9 @@ package iuh.igc.service.organization.impl;
 
 import iuh.igc.config.s3.S3Service;
 import iuh.igc.dto.request.organization.CreateOrganizationRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationContactRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationGeneralRequest;
+import iuh.igc.dto.request.organization.UpdateOrganizationLegalRequest;
 import iuh.igc.dto.response.orginazation.OrganizationResponse;
 import iuh.igc.dto.response.orginazation.OrganizationSummaryResponse;
 import iuh.igc.entity.organization.Organization;
@@ -21,6 +24,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -172,6 +176,68 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     /**
      * =============================================
+     * Cập nhật tổ chức (chỉ OWNER)
+     * =============================================
+     **/
+
+    @Override
+    @Transactional
+    public void updateOrganizationGeneral(Long id, UpdateOrganizationGeneralRequest request) {
+        User user = currentUserProvider.get();
+        Organization organization = getOrganizationForOwner(id, user.getId());
+
+        String code = request.code();
+        String domain = request.domain() != null && !request.domain().isBlank()
+                ? request.domain().trim().toLowerCase()
+                : null;
+        String description = request.description() != null && !request.description().isBlank()
+                ? request.description()
+                : null;
+
+        if (organizationRepository.existsByCodeAndIdNot(code, id))
+            throw new DataIntegrityViolationException("Mã tổ chức đã tồn tại");
+
+        if (domain != null && organizationRepository.existsByDomainAndIdNot(domain, id))
+            throw new DataIntegrityViolationException("Domain đã tồn tại");
+
+        organization.setName(request.name());
+        organization.setCode(code);
+        organization.setDomain(domain);
+        organization.setDescription(description);
+    }
+
+    @Override
+    @Transactional
+    public void updateOrganizationLegal(Long id, UpdateOrganizationLegalRequest request) {
+        User user = currentUserProvider.get();
+        Organization organization = getOrganizationForOwner(id, user.getId());
+
+        if (organizationRepository.existsByTaxCodeAndIdNot(request.taxCode(), id))
+            throw new DataIntegrityViolationException("Mã số thuế đã tồn tại");
+
+        String representativeName = request.representativeName() != null && !request.representativeName().isBlank()
+                ? request.representativeName()
+                : null;
+
+        organization.setLegalName(request.legalName());
+        organization.setTaxCode(request.taxCode());
+        organization.setLegalAddress(request.legalAddress());
+        organization.setRepresentativeName(representativeName);
+    }
+
+    @Override
+    @Transactional
+    public void updateOrganizationContact(Long id, UpdateOrganizationContactRequest request) {
+        User user = currentUserProvider.get();
+        Organization organization = getOrganizationForOwner(id, user.getId());
+
+        organization.setContactName(request.contactName());
+        organization.setContactEmail(request.contactEmail());
+        organization.setContactPhone(request.contactPhone());
+    }
+
+    /**
+     * =============================================
      * Mapper
      * =============================================
      **/
@@ -206,6 +272,28 @@ public class OrganizationServiceImpl implements OrganizationService {
                 .contactPhone(organization.getContactPhone())
                 .servicePlan(organization.getServicePlan())
                 .build();
+    }
+
+    /**
+     * =============================================
+     * Authorization: lấy tổ chức và xác thực vai trò OWNER
+     * =============================================
+     **/
+    private Organization getOrganizationForOwner(Long organizationId, Long userId) {
+        Organization organization = organizationRepository
+                .findById(organizationId)
+                .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy tổ chức"));
+
+        boolean isOwner = organizationMemberRepository.existsByOrganization_IdAndUser_IdAndOrganizationRole(
+                organizationId,
+                userId,
+                OrganizationRole.OWNER
+        );
+
+        if (!isOwner)
+            throw new AccessDeniedException("Bạn không có quyền cập nhật tổ chức này");
+
+        return organization;
     }
 
 
