@@ -4,6 +4,8 @@ import iuh.igc.entity.constant.OrganizationRole;
 import iuh.igc.entity.organization.OrganizationMember;
 import org.jspecify.annotations.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -18,6 +20,8 @@ public interface OrganizationMemberRepository extends JpaRepository<@NonNull Org
     boolean existsByOrganization_IdAndUser_Id(Long organizationId, Long userId);
 
     Optional<OrganizationMember> findByOrganization_IdAndUser_Id(Long organizationId, Long userId);
+
+    Page<OrganizationMember> findByOrganization_Id(Long organizationId, Pageable pageable);
 
     boolean existsByOrganization_IdAndUser_IdAndOrganizationRole(
             Long organizationId,

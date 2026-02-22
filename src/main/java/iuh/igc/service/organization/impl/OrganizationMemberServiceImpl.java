@@ -1,5 +1,6 @@
 package iuh.igc.service.organization.impl;
 
+import iuh.igc.dto.response.orginazation.OrganizationMemberResponse;
 import iuh.igc.entity.User;
 import iuh.igc.entity.constant.OrganizationRole;
 import iuh.igc.entity.organization.OrganizationMember;
@@ -14,6 +15,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +25,28 @@ public class OrganizationMemberServiceImpl implements OrganizationMemberService 
 
     OrganizationMemberRepository organizationMemberRepository;
     CurrentUserProvider currentUserProvider;
+
+    /**
+     * =============================================
+     * List members
+     * =============================================
+     **/
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<OrganizationMemberResponse> getOrganizationMembers(Long organizationId, Pageable pageable) {
+        User actor = currentUserProvider.get();
+
+        boolean isMember = organizationMemberRepository
+                .existsByOrganization_IdAndUser_Id(organizationId, actor.getId());
+        if (!isMember) {
+            throw new AccessDeniedException("Bạn không có quyền xem danh sách thành viên");
+        }
+
+        return organizationMemberRepository
+                .findByOrganization_Id(organizationId, pageable)
+                .map(this::mapToOrganizationMemberResponse);
+    }
 
     /**
      * =============================================
@@ -100,6 +125,18 @@ public class OrganizationMemberServiceImpl implements OrganizationMemberService 
         return organizationMemberRepository
                 .findByOrganization_IdAndUser_Id(organizationId, userId)
                 .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy thành viên trong tổ chức"));
+    }
+
+    private OrganizationMemberResponse mapToOrganizationMemberResponse(OrganizationMember member) {
+        User user = member.getUser();
+        return OrganizationMemberResponse
+                .builder()
+                .userId(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .avatarUrl(user.getAvatarUrl())
+                .role(member.getOrganizationRole())
+                .build();
     }
 
     private void ensureOwner(OrganizationMember member) {
