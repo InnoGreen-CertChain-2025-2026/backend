@@ -8,6 +8,7 @@ import lombok.Builder;
  **/
 @Builder
 public record UserSessionResponse(
+        Long id,
         String email,
         String name,
         String avatarUrl

@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService {
         User user = currentUserProvider.get();
 
         return new UserSessionResponse(
+                user.getId(),
                 user.getEmail(),
                 user.getName(),
                 user.getAvatarUrl()
